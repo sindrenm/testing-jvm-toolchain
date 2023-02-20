@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.dagger.hilt.android)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
 }
@@ -37,6 +38,10 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 kotlin {
     jvmToolchain {
         vendor.set(JvmVendorSpec.AZUL)
@@ -45,12 +50,17 @@ kotlin {
 }
 
 dependencies {
+    kapt(libs.dagger.hilt.compiler)
+
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core)
     implementation(libs.google.material)
+
+    implementation(libs.dagger.hilt.runtime)
 
     testImplementation(libs.junit4)
 
     androidTestImplementation(libs.androidx.test.espresso)
     androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.dagger.hilt.testing)
 }
